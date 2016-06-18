@@ -1,13 +1,13 @@
 <?php
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Foundation\Http\Middleware\Authorize;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
-use Illuminate\Auth\Access\Gate;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Http\Middleware\Authorize;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 {
@@ -18,9 +18,9 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->user = new stdClass;
+        $this->user = new stdClass();
 
-        $this->container = new Container;
+        $this->container = new Container();
 
         $this->container->singleton(GateContract::class, function () {
             return new Gate($this->container, function () {
@@ -28,7 +28,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
             });
         });
 
-        $this->router = new Router(new Dispatcher, $this->container);
+        $this->router = new Router(new Dispatcher(), $this->container);
     }
 
     public function testSimpleAbilityUnauthorized()
@@ -43,7 +43,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('dashboard', [
             'middleware' => Authorize::class.':view-dashboard',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -59,7 +59,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('dashboard', [
             'middleware' => Authorize::class.':view-dashboard',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -81,7 +81,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('users/create', [
             'middleware' => Authorize::class.':create,App\User',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -99,7 +99,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('users/create', [
             'middleware' => Authorize::class.':create,App\User',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -113,7 +113,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(AuthorizationException::class);
 
-        $post = new stdClass;
+        $post = new stdClass();
 
         $this->router->bind('post', function () use ($post) {
             return $post;
@@ -127,7 +127,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('posts/{post}/edit', [
             'middleware' => Authorize::class.':edit,post',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -137,7 +137,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
     public function testModelAuthorized()
     {
-        $post = new stdClass;
+        $post = new stdClass();
 
         $this->router->bind('post', function () use ($post) {
             return $post;
@@ -151,7 +151,7 @@ class FoundationAuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('posts/{post}/edit', [
             'middleware' => Authorize::class.':edit,post',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);

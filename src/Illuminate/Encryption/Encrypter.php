@@ -2,10 +2,10 @@
 
 namespace Illuminate\Encryption;
 
-use RuntimeException;
 use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
+use Illuminate\Contracts\Encryption\EncryptException;
+use RuntimeException;
 
 class Encrypter extends BaseEncrypter implements EncrypterContract
 {
@@ -19,11 +19,12 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Create a new encrypter instance.
      *
-     * @param  string  $key
-     * @param  string  $cipher
-     * @return void
+     * @param string $key
+     * @param string $cipher
      *
      * @throws \RuntimeException
+     *
+     * @return void
      */
     public function __construct($key, $cipher = 'AES-128-CBC')
     {
@@ -40,8 +41,9 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Determine if the given key and cipher combination is valid.
      *
-     * @param  string  $key
-     * @param  string  $cipher
+     * @param string $key
+     * @param string $cipher
+     *
      * @return bool
      */
     public static function supported($key, $cipher)
@@ -54,10 +56,11 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Encrypt the given value.
      *
-     * @param  string  $value
-     * @return string
+     * @param string $value
      *
      * @throws \Illuminate\Contracts\Encryption\EncryptException
+     *
+     * @return string
      */
     public function encrypt($value)
     {
@@ -76,7 +79,7 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
 
         $json = json_encode(compact('iv', 'value', 'mac'));
 
-        if (! is_string($json)) {
+        if (!is_string($json)) {
             throw new EncryptException('Could not encrypt the data.');
         }
 
@@ -86,10 +89,11 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Decrypt the given value.
      *
-     * @param  string  $payload
-     * @return string
+     * @param string $payload
      *
      * @throws \Illuminate\Contracts\Encryption\DecryptException
+     *
+     * @return string
      */
     public function decrypt($payload)
     {

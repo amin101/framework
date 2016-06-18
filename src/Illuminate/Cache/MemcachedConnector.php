@@ -10,10 +10,11 @@ class MemcachedConnector
     /**
      * Create a new Memcached connection.
      *
-     * @param  array  $servers
-     * @return \Memcached
+     * @param array $servers
      *
      * @throws \RuntimeException
+     *
+     * @return \Memcached
      */
     public function connect(array $servers)
     {
@@ -30,7 +31,7 @@ class MemcachedConnector
 
         $memcachedStatus = $memcached->getVersion();
 
-        if (! is_array($memcachedStatus)) {
+        if (!is_array($memcachedStatus)) {
             throw new RuntimeException('No Memcached servers added.');
         }
 
@@ -48,6 +49,6 @@ class MemcachedConnector
      */
     protected function getMemcached()
     {
-        return new Memcached;
+        return new Memcached();
     }
 }

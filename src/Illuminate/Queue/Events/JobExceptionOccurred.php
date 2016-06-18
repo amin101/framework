@@ -35,10 +35,11 @@ class JobExceptionOccurred
     /**
      * Create a new event instance.
      *
-     * @param  string  $connectionName
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  array  $data
-     * @param  \Throwable  $exception
+     * @param string                          $connectionName
+     * @param \Illuminate\Contracts\Queue\Job $job
+     * @param array                           $data
+     * @param \Throwable                      $exception
+     *
      * @return void
      */
     public function __construct($connectionName, $job, $data, $exception)

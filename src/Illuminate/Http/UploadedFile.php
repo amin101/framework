@@ -42,7 +42,8 @@ class UploadedFile extends SymfonyUploadedFile
     /**
      * Get a filename for the file that is the MD5 hash of the contents.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return string
      */
     public function hashName($path = null)
@@ -57,8 +58,9 @@ class UploadedFile extends SymfonyUploadedFile
     /**
      * Create a new file instance from a base instance.
      *
-     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile  $file
-     * @param  bool $test
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param bool                                                $test
+     *
      * @return static
      */
     public static function createFromBase(SymfonyUploadedFile $file, $test = false)

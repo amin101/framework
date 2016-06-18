@@ -2,8 +2,8 @@
 
 namespace Illuminate\Auth\Console;
 
-use Illuminate\Console\Command;
 use Illuminate\Console\AppNamespaceDetectorTrait;
+use Illuminate\Console\Command;
 
 class MakeAuthCommand extends Command
 {
@@ -29,14 +29,14 @@ class MakeAuthCommand extends Command
      * @var array
      */
     protected $views = [
-        'auth/login.stub' => 'auth/login.blade.php',
-        'auth/register.stub' => 'auth/register.blade.php',
+        'auth/login.stub'           => 'auth/login.blade.php',
+        'auth/register.stub'        => 'auth/register.blade.php',
         'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
         'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
         'auth/emails/password.stub' => 'auth/emails/password.blade.php',
-        'layouts/app.stub' => 'layouts/app.blade.php',
-        'home.stub' => 'home.blade.php',
-        'welcome.stub' => 'welcome.blade.php',
+        'layouts/app.stub'          => 'layouts/app.blade.php',
+        'home.stub'                 => 'home.blade.php',
+        'welcome.stub'              => 'welcome.blade.php',
     ];
 
     /**
@@ -50,7 +50,7 @@ class MakeAuthCommand extends Command
 
         $this->exportViews();
 
-        if (! $this->option('views')) {
+        if (!$this->option('views')) {
             $this->info('Installed HomeController.');
 
             file_put_contents(
@@ -77,15 +77,15 @@ class MakeAuthCommand extends Command
      */
     protected function createDirectories()
     {
-        if (! is_dir(base_path('resources/views/layouts'))) {
+        if (!is_dir(base_path('resources/views/layouts'))) {
             mkdir(base_path('resources/views/layouts'), 0755, true);
         }
 
-        if (! is_dir(base_path('resources/views/auth/passwords'))) {
+        if (!is_dir(base_path('resources/views/auth/passwords'))) {
             mkdir(base_path('resources/views/auth/passwords'), 0755, true);
         }
 
-        if (! is_dir(base_path('resources/views/auth/emails'))) {
+        if (!is_dir(base_path('resources/views/auth/emails'))) {
             mkdir(base_path('resources/views/auth/emails'), 0755, true);
         }
     }

@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use Illuminate\Routing\Router;
-use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Http\Request;
 use Illuminate\Routing\ResourceRegistrar;
+use Illuminate\Routing\Route;
+use Illuminate\Routing\Router;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoutingRouteTest extends PHPUnit_Framework_TestCase
@@ -609,7 +609,7 @@ class RoutingRouteTest extends PHPUnit_Framework_TestCase
 
     public function testModelBindingThroughIOC()
     {
-        $router = new Router(new Dispatcher, $container = new Container);
+        $router = new Router(new Dispatcher(), $container = new Container());
 
         $container->bind('RouteModelInterface', 'RouteModelBindingStub');
         $router->get('foo/{bar}', function ($name) {
@@ -918,7 +918,7 @@ class RoutingRouteTest extends PHPUnit_Framework_TestCase
         $router = $this->getRouter();
         $router->resource('foo', 'FooController', ['names' => [
             'index' => 'foo',
-            'show' => 'bar',
+            'show'  => 'bar',
         ]]);
 
         $this->assertTrue($router->getRoutes()->hasNamedRoute('foo'));
@@ -1048,7 +1048,7 @@ class RoutingRouteTest extends PHPUnit_Framework_TestCase
 
     protected function getRouter()
     {
-        return new Router(new Illuminate\Events\Dispatcher);
+        return new Router(new Illuminate\Events\Dispatcher());
     }
 }
 

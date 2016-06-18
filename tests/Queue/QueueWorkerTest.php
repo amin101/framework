@@ -67,7 +67,7 @@ class QueueWorkerTest extends PHPUnit_Framework_TestCase
         $worker = new Illuminate\Queue\Worker(m::mock('Illuminate\Queue\QueueManager'));
         $job = m::mock('Illuminate\Contracts\Queue\Job');
         $job->shouldReceive('fire')->once()->andReturnUsing(function () {
-            throw new RuntimeException;
+            throw new RuntimeException();
         });
         $job->shouldReceive('isDeleted')->once()->andReturn(false);
         $job->shouldReceive('release')->once()->with(5);
@@ -83,7 +83,7 @@ class QueueWorkerTest extends PHPUnit_Framework_TestCase
         $worker = new Illuminate\Queue\Worker(m::mock('Illuminate\Queue\QueueManager'));
         $job = m::mock('Illuminate\Contracts\Queue\Job');
         $job->shouldReceive('fire')->once()->andReturnUsing(function () {
-            throw new RuntimeException;
+            throw new RuntimeException();
         });
         $job->shouldReceive('isDeleted')->once()->andReturn(true);
         $job->shouldReceive('release')->never();

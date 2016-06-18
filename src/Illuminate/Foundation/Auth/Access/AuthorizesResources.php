@@ -7,9 +7,10 @@ trait AuthorizesResources
     /**
      * Authorize a resource action based on the incoming request.
      *
-     * @param  string  $model
-     * @param  string|null  $parameter
-     * @param  array  $options
+     * @param string      $model
+     * @param string|null $parameter
+     * @param array       $options
+     *
      * @return void
      */
     public function authorizeResource($model, $parameter = null, array $options = [])
@@ -31,12 +32,12 @@ trait AuthorizesResources
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'view',
-            'create' => 'create',
-            'store' => 'create',
-            'show' => 'view',
-            'edit' => 'update',
-            'update' => 'update',
+            'index'   => 'view',
+            'create'  => 'create',
+            'store'   => 'create',
+            'show'    => 'view',
+            'edit'    => 'update',
+            'update'  => 'update',
             'destroy' => 'delete',
         ];
     }

@@ -12,7 +12,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testUniqueness()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->add('foo', 'bar');
         $container->add('foo', 'bar');
         $messages = $container->getMessages();
@@ -21,7 +21,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testMessagesAreAdded()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $container->add('foo', 'baz');
@@ -48,7 +48,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testGetReturnsArrayOfMessagesByKey()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $container->add('foo', 'baz');
@@ -57,7 +57,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testFirstReturnsSingleMessage()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $container->add('foo', 'baz');
@@ -67,7 +67,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testHasIndicatesExistence()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $this->assertTrue($container->has('foo'));
@@ -76,7 +76,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testAllReturnsAllMessages()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $container->add('boom', 'baz');
@@ -85,7 +85,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testFormatIsRespected()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat('<p>:message</p>');
         $container->add('foo', 'bar');
         $container->add('boom', 'baz');
@@ -102,7 +102,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testMessageBagReturnsCorrectArray()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $container->add('boom', 'baz');
@@ -112,7 +112,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testMessageBagReturnsExpectedJson()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $container->setFormat(':message');
         $container->add('foo', 'bar');
         $container->add('boom', 'baz');
@@ -122,7 +122,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testCountReturnsCorrectValue()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
         $this->assertCount(0, $container);
 
         $container->add('foo', 'bar');
@@ -134,7 +134,7 @@ class SupportMessageBagTest extends PHPUnit_Framework_TestCase
 
     public function testCountable()
     {
-        $container = new MessageBag;
+        $container = new MessageBag();
 
         $container->add('foo', 'bar');
         $container->add('boom', 'baz');
