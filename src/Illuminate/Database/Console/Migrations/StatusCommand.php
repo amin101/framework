@@ -31,7 +31,8 @@ class StatusCommand extends BaseCommand
     /**
      * Create a new migration rollback command instance.
      *
-     * @param  \Illuminate\Database\Migrations\Migrator $migrator
+     * @param \Illuminate\Database\Migrations\Migrator $migrator
+     *
      * @return \Illuminate\Database\Console\Migrations\StatusCommand
      */
     public function __construct(Migrator $migrator)
@@ -48,13 +49,13 @@ class StatusCommand extends BaseCommand
      */
     public function fire()
     {
-        if (! $this->migrator->repositoryExists()) {
+        if (!$this->migrator->repositoryExists()) {
             return $this->error('No migrations found.');
         }
 
         $this->migrator->setConnection($this->input->getOption('database'));
 
-        if (! is_null($path = $this->input->getOption('path'))) {
+        if (!is_null($path = $this->input->getOption('path'))) {
             $path = $this->laravel->basePath().'/'.$path;
         } else {
             $path = $this->getMigrationPath();
@@ -78,7 +79,8 @@ class StatusCommand extends BaseCommand
     /**
      * Get all of the migration files.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return array
      */
     protected function getAllMigrationFiles($path)

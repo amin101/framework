@@ -24,8 +24,9 @@ abstract class Controller
     /**
      * Register middleware on the controller.
      *
-     * @param  array|string  $middleware
-     * @param  array   $options
+     * @param array|string $middleware
+     * @param array        $options
+     *
      * @return \Illuminate\Routing\ControllerMiddlewareOptions
      */
     public function middleware($middleware, array $options = [])
@@ -60,7 +61,8 @@ abstract class Controller
     /**
      * Set the router instance.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public static function setRouter(Router $router)
@@ -71,8 +73,9 @@ abstract class Controller
     /**
      * Execute an action on the controller.
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function callAction($method, $parameters)
@@ -83,10 +86,11 @@ abstract class Controller
     /**
      * Handle calls to missing methods on the controller.
      *
-     * @param  array   $parameters
-     * @return mixed
+     * @param array $parameters
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return mixed
      */
     public function missingMethod($parameters = [])
     {
@@ -96,11 +100,12 @@ abstract class Controller
     /**
      * Handle calls to missing methods on the controller.
      *
-     * @param  string  $method
-     * @param  array   $parameters
-     * @return mixed
+     * @param string $method
+     * @param array  $parameters
      *
      * @throws \BadMethodCallException
+     *
+     * @return mixed
      */
     public function __call($method, $parameters)
     {

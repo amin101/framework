@@ -16,8 +16,9 @@ abstract class BaseEncrypter
     /**
      * Create a MAC for the given value.
      *
-     * @param  string  $iv
-     * @param  string  $value
+     * @param string $iv
+     * @param string $value
+     *
      * @return string
      */
     protected function hash($iv, $value)
@@ -28,10 +29,11 @@ abstract class BaseEncrypter
     /**
      * Get the JSON array from the given payload.
      *
-     * @param  string  $payload
-     * @return array
+     * @param string $payload
      *
      * @throws \Illuminate\Contracts\Encryption\DecryptException
+     *
+     * @return array
      */
     protected function getJsonPayload($payload)
     {
@@ -40,11 +42,11 @@ abstract class BaseEncrypter
         // If the payload is not valid JSON or does not have the proper keys set we will
         // assume it is invalid and bail out of the routine since we will not be able
         // to decrypt the given value. We'll also check the MAC for this encryption.
-        if (! $payload || $this->invalidPayload($payload)) {
+        if (!$payload || $this->invalidPayload($payload)) {
             throw new DecryptException('The payload is invalid.');
         }
 
-        if (! $this->validMac($payload)) {
+        if (!$this->validMac($payload)) {
             throw new DecryptException('The MAC is invalid.');
         }
 
@@ -54,21 +56,23 @@ abstract class BaseEncrypter
     /**
      * Verify that the encryption payload is valid.
      *
-     * @param  array|mixed  $data
+     * @param array|mixed $data
+     *
      * @return bool
      */
     protected function invalidPayload($data)
     {
-        return ! is_array($data) || ! isset($data['iv']) || ! isset($data['value']) || ! isset($data['mac']);
+        return !is_array($data) || !isset($data['iv']) || !isset($data['value']) || !isset($data['mac']);
     }
 
     /**
      * Determine if the MAC for the given payload is valid.
      *
-     * @param  array  $payload
-     * @return bool
+     * @param array $payload
      *
      * @throws \RuntimeException
+     *
+     * @return bool
      */
     protected function validMac(array $payload)
     {

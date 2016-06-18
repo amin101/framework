@@ -24,6 +24,7 @@ interface Application extends Container
      * Get or check the current application environment.
      *
      * @param  mixed
+     *
      * @return string
      */
     public function environment();
@@ -45,9 +46,10 @@ interface Application extends Container
     /**
      * Register a service provider with the application.
      *
-     * @param  \Illuminate\Support\ServiceProvider|string  $provider
-     * @param  array  $options
-     * @param  bool   $force
+     * @param \Illuminate\Support\ServiceProvider|string $provider
+     * @param array                                      $options
+     * @param bool                                       $force
+     *
      * @return \Illuminate\Support\ServiceProvider
      */
     public function register($provider, $options = [], $force = false);
@@ -55,8 +57,9 @@ interface Application extends Container
     /**
      * Register a deferred provider and service.
      *
-     * @param  string  $provider
-     * @param  string  $service
+     * @param string $provider
+     * @param string $service
+     *
      * @return void
      */
     public function registerDeferredProvider($provider, $service = null);
@@ -71,7 +74,8 @@ interface Application extends Container
     /**
      * Register a new boot listener.
      *
-     * @param  mixed  $callback
+     * @param mixed $callback
+     *
      * @return void
      */
     public function booting($callback);
@@ -79,7 +83,8 @@ interface Application extends Container
     /**
      * Register a new "booted" listener.
      *
-     * @param  mixed  $callback
+     * @param mixed $callback
+     *
      * @return void
      */
     public function booted($callback);

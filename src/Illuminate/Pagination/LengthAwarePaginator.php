@@ -2,15 +2,15 @@
 
 namespace Illuminate\Pagination;
 
-use Countable;
 use ArrayAccess;
-use JsonSerializable;
-use IteratorAggregate;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Pagination\Presenter;
+use Countable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
+use Illuminate\Contracts\Pagination\Presenter;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Support\Collection;
+use IteratorAggregate;
+use JsonSerializable;
 
 class LengthAwarePaginator extends AbstractPaginator implements Arrayable, ArrayAccess, Countable, IteratorAggregate, JsonSerializable, Jsonable, LengthAwarePaginatorContract
 {
@@ -31,11 +31,12 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Create a new paginator instance.
      *
-     * @param  mixed  $items
-     * @param  int  $total
-     * @param  int  $perPage
-     * @param  int|null  $currentPage
-     * @param  array  $options (path, query, fragment, pageName)
+     * @param mixed    $items
+     * @param int      $total
+     * @param int      $perPage
+     * @param int|null $currentPage
+     * @param array    $options     (path, query, fragment, pageName)
+     *
      * @return void
      */
     public function __construct($items, $total, $perPage, $currentPage = null, array $options = [])
@@ -55,8 +56,9 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Get the current page for the request.
      *
-     * @param  int  $currentPage
-     * @param  int  $lastPage
+     * @param int $currentPage
+     * @param int $lastPage
+     *
      * @return int
      */
     protected function setCurrentPage($currentPage, $lastPage)
@@ -111,7 +113,8 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Render the paginator using the given presenter.
      *
-     * @param  \Illuminate\Contracts\Pagination\Presenter|null  $presenter
+     * @param \Illuminate\Contracts\Pagination\Presenter|null $presenter
+     *
      * @return string
      */
     public function links(Presenter $presenter = null)
@@ -122,7 +125,8 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Render the paginator using the given presenter.
      *
-     * @param  \Illuminate\Contracts\Pagination\Presenter|null  $presenter
+     * @param \Illuminate\Contracts\Pagination\Presenter|null $presenter
+     *
      * @return string
      */
     public function render(Presenter $presenter = null)
@@ -169,7 +173,8 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  int  $options
+     * @param int $options
+     *
      * @return string
      */
     public function toJson($options = 0)

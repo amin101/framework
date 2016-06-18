@@ -1,8 +1,8 @@
 <?php
 
-use Mockery as m;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Mockery as m;
 
 class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
 {
@@ -13,9 +13,9 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
 
     public function testModelsAreProperlyHydrated()
     {
-        $model1 = new EloquentBelongsToManyModelStub;
+        $model1 = new EloquentBelongsToManyModelStub();
         $model1->fill(['name' => 'taylor', 'pivot_user_id' => 1, 'pivot_role_id' => 2]);
-        $model2 = new EloquentBelongsToManyModelStub;
+        $model2 = new EloquentBelongsToManyModelStub();
         $model2->fill(['name' => 'dayle', 'pivot_user_id' => 3, 'pivot_role_id' => 4]);
         $models = [$model1, $model2];
 
@@ -53,9 +53,9 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
 
     public function testTimestampsCanBeRetrievedProperly()
     {
-        $model1 = new EloquentBelongsToManyModelStub;
+        $model1 = new EloquentBelongsToManyModelStub();
         $model1->fill(['name' => 'taylor', 'pivot_user_id' => 1, 'pivot_role_id' => 2]);
-        $model2 = new EloquentBelongsToManyModelStub;
+        $model2 = new EloquentBelongsToManyModelStub();
         $model2->fill(['name' => 'dayle', 'pivot_user_id' => 3, 'pivot_role_id' => 4]);
         $models = [$model1, $model2];
 
@@ -84,18 +84,18 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
     {
         $relation = $this->getRelation();
 
-        $result1 = new EloquentBelongsToManyModelPivotStub;
+        $result1 = new EloquentBelongsToManyModelPivotStub();
         $result1->pivot->user_id = 1;
-        $result2 = new EloquentBelongsToManyModelPivotStub;
+        $result2 = new EloquentBelongsToManyModelPivotStub();
         $result2->pivot->user_id = 2;
-        $result3 = new EloquentBelongsToManyModelPivotStub;
+        $result3 = new EloquentBelongsToManyModelPivotStub();
         $result3->pivot->user_id = 2;
 
-        $model1 = new EloquentBelongsToManyModelStub;
+        $model1 = new EloquentBelongsToManyModelStub();
         $model1->id = 1;
-        $model2 = new EloquentBelongsToManyModelStub;
+        $model2 = new EloquentBelongsToManyModelStub();
         $model2->id = 2;
-        $model3 = new EloquentBelongsToManyModelStub;
+        $model3 = new EloquentBelongsToManyModelStub();
         $model3->id = 3;
 
         $relation->getRelated()->shouldReceive('newCollection')->andReturnUsing(function ($array) {
@@ -128,9 +128,9 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
     {
         $relation = $this->getRelation();
         $relation->getQuery()->shouldReceive('whereIn')->once()->with('user_role.user_id', [1, 2]);
-        $model1 = new EloquentBelongsToManyModelStub;
+        $model1 = new EloquentBelongsToManyModelStub();
         $model1->id = 1;
-        $model2 = new EloquentBelongsToManyModelStub;
+        $model2 = new EloquentBelongsToManyModelStub();
         $model2->id = 2;
         $relation->addEagerConstraints([$model1, $model2]);
     }
@@ -299,7 +299,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
     public function testFirstMethod()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsToMany[get]', $this->getRelationArguments());
-        $relation->shouldReceive('get')->once()->andReturn(new Illuminate\Database\Eloquent\Collection([new StdClass]));
+        $relation->shouldReceive('get')->once()->andReturn(new Illuminate\Database\Eloquent\Collection([new StdClass()]));
         $relation->shouldReceive('take')->with(1)->once()->andReturn($relation);
 
         $this->assertInstanceOf(StdClass::class, $relation->first());
@@ -308,7 +308,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
     public function testFindMethod()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsToMany[first]', $this->getRelationArguments());
-        $relation->shouldReceive('first')->once()->andReturn(new StdClass);
+        $relation->shouldReceive('first')->once()->andReturn(new StdClass());
         $relation->shouldReceive('where')->with('roles.id', '=', 'foo')->once()->andReturn($relation);
 
         $related = $relation->getRelated();
@@ -320,7 +320,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
     public function testFindManyMethod()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsToMany[get]', $this->getRelationArguments());
-        $relation->shouldReceive('get')->once()->andReturn(new Illuminate\Database\Eloquent\Collection([new StdClass, new StdClass]));
+        $relation->shouldReceive('get')->once()->andReturn(new Illuminate\Database\Eloquent\Collection([new StdClass(), new StdClass()]));
         $relation->shouldReceive('whereIn')->with('roles.id', ['foo', 'bar'])->once()->andReturn($relation);
 
         $related = $relation->getRelated();
@@ -636,7 +636,7 @@ class EloquentBelongsToManyModelPivotStub extends Illuminate\Database\Eloquent\M
 
     public function __construct()
     {
-        $this->pivot = new EloquentBelongsToManyPivotStub;
+        $this->pivot = new EloquentBelongsToManyPivotStub();
     }
 }
 

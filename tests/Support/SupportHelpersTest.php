@@ -1,7 +1,7 @@
 <?php
 
-use Mockery as m;
 use Illuminate\Support\Str;
+use Mockery as m;
 
 class SupportHelpersTest extends PHPUnit_Framework_TestCase
 {
@@ -89,13 +89,13 @@ class SupportHelpersTest extends PHPUnit_Framework_TestCase
         $array = [
             [
                 'account' => 'a',
-                'users' => [
+                'users'   => [
                     ['first' => 'taylor', 'last' => 'otwell', 'email' => 'taylorotwell@gmail.com'],
                 ],
             ],
             [
                 'account' => 'b',
-                'users' => [
+                'users'   => [
                     ['first' => 'abigail', 'last' => 'otwell'],
                     ['first' => 'dayle', 'last' => 'rees'],
                 ],
@@ -322,8 +322,8 @@ class SupportHelpersTest extends PHPUnit_Framework_TestCase
 
     public function testObjectGet()
     {
-        $class = new StdClass;
-        $class->name = new StdClass;
+        $class = new StdClass();
+        $class->name = new StdClass();
         $class->name->first = 'Taylor';
 
         $this->assertEquals('Taylor', object_get($class, 'name.first'));

@@ -1,8 +1,8 @@
 <?php
 
-use Mockery as m;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Mockery as m;
 
 class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 {
@@ -138,7 +138,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
     public function testValueMethodWithModelFound()
     {
         $builder = m::mock('Illuminate\Database\Eloquent\Builder[first]', [$this->getMockQueryBuilder()]);
-        $mockModel = new StdClass;
+        $mockModel = new StdClass();
         $mockModel->name = 'foo';
         $builder->shouldReceive('first')->with(['name'])->andReturn($mockModel);
 
@@ -398,7 +398,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
         $builder = $this->getBuilder();
         $builder->getQuery()->shouldReceive('from');
         $builder->getQuery()->shouldReceive('where')->once()->with('foo', 'bar');
-        $builder->setModel($model = new EloquentBuilderTestScopeStub);
+        $builder->setModel($model = new EloquentBuilderTestScopeStub());
         $result = $builder->approved();
 
         $this->assertEquals($builder, $result);
@@ -425,7 +425,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testRealNestedWhereWithScopes()
     {
-        $model = new EloquentBuilderTestNestedStub;
+        $model = new EloquentBuilderTestNestedStub();
         $this->mockConnectionForModel($model, 'SQLite');
         $query = $model->newQuery()->where('foo', '=', 'bar')->where(function ($query) {
             $query->where('baz', '>', 9000);
@@ -436,7 +436,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testRealNestedWhereWithMultipleScopesAndOneDeadScope()
     {
-        $model = new EloquentBuilderTestNestedStub;
+        $model = new EloquentBuilderTestNestedStub();
         $this->mockConnectionForModel($model, 'SQLite');
         $query = $model->newQuery()->empty()->where('foo', '=', 'bar')->empty()->where(function ($query) {
             $query->empty()->where('baz', '>', 9000);
@@ -472,7 +472,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testWithCount()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->withCount('foo');
 
@@ -481,7 +481,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testWithCountAndSelect()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->select('id')->withCount('foo');
 
@@ -490,7 +490,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testWithCountAndMergedWheres()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->select('id')->withCount(['activeFoo' => function ($q) {
             $q->where('bam', '>', 'qux');
@@ -502,7 +502,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testWithCountAndContraintsAndHaving()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->where('bar', 'baz');
         $builder->withCount(['foo' => function ($q) {
@@ -515,7 +515,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testHasWithContraintsAndHavingInSubquery()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->where('bar', 'baz');
         $builder->whereHas('foo', function ($q) {
@@ -528,7 +528,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testHasWithContraintsWithOrWhereAndHavingInSubquery()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->where('name', 'larry');
         $builder->whereHas('address', function ($q) {
@@ -543,7 +543,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testHasWithContraintsAndJoinAndHavingInSubquery()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
         $builder = $model->where('bar', 'baz');
         $builder->whereHas('foo', function ($q) {
             $q->join('quuuux', function ($j) {
@@ -558,7 +558,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testHasWithContraintsAndHavingInSubqueryWithCount()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->where('bar', 'baz');
         $builder->whereHas('foo', function ($q) {
@@ -571,7 +571,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testHasNestedWithConstraints()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->whereHas('foo', function ($q) {
             $q->whereHas('bar', function ($q) {
@@ -588,7 +588,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testHasNested()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->whereHas('foo', function ($q) {
             $q->has('bar');
@@ -601,7 +601,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testOrHasNested()
     {
-        $model = new EloquentBuilderTestModelParentStub;
+        $model = new EloquentBuilderTestModelParentStub();
 
         $builder = $model->whereHas('foo', function ($q) {
             $q->has('bar');
@@ -616,7 +616,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testSelfHasNested()
     {
-        $model = new EloquentBuilderTestModelSelfRelatedStub;
+        $model = new EloquentBuilderTestModelSelfRelatedStub();
 
         $nestedSql = $model->whereHas('parentFoo', function ($q) {
             $q->has('childFoo');
@@ -636,7 +636,7 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testSelfHasNestedUsesAlias()
     {
-        $model = new EloquentBuilderTestModelSelfRelatedStub;
+        $model = new EloquentBuilderTestModelSelfRelatedStub();
 
         $sql = $model->has('parentFoo.childFoo')->toSql();
 
@@ -653,8 +653,8 @@ class DatabaseEloquentBuilderTest extends PHPUnit_Framework_TestCase
     {
         $grammarClass = 'Illuminate\Database\Query\Grammars\\'.$database.'Grammar';
         $processorClass = 'Illuminate\Database\Query\Processors\\'.$database.'Processor';
-        $grammar = new $grammarClass;
-        $processor = new $processorClass;
+        $grammar = new $grammarClass();
+        $processor = new $processorClass();
         $connection = m::mock('Illuminate\Database\ConnectionInterface', ['getQueryGrammar' => $grammar, 'getPostProcessor' => $processor]);
         $resolver = m::mock('Illuminate\Database\ConnectionResolverInterface', ['connection' => $connection]);
         $class = get_class($model);

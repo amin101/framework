@@ -7,9 +7,10 @@ class NullFailedJobProvider implements FailedJobProviderInterface
     /**
      * Log a failed job into storage.
      *
-     * @param  string  $connection
-     * @param  string  $queue
-     * @param  string  $payload
+     * @param string $connection
+     * @param string $queue
+     * @param string $payload
+     *
      * @return int|null
      */
     public function log($connection, $queue, $payload)
@@ -30,7 +31,8 @@ class NullFailedJobProvider implements FailedJobProviderInterface
     /**
      * Get a single failed job.
      *
-     * @param  mixed  $id
+     * @param mixed $id
+     *
      * @return array
      */
     public function find($id)
@@ -41,7 +43,8 @@ class NullFailedJobProvider implements FailedJobProviderInterface
     /**
      * Delete a single failed job from storage.
      *
-     * @param  mixed  $id
+     * @param mixed $id
+     *
      * @return bool
      */
     public function forget($id)

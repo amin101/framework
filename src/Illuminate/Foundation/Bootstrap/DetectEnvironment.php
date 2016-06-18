@@ -11,12 +11,13 @@ class DetectEnvironment
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     *
      * @return void
      */
     public function bootstrap(Application $app)
     {
-        if (! $app->configurationIsCached()) {
+        if (!$app->configurationIsCached()) {
             $this->checkForSpecificEnvironmentFile($app);
 
             try {
@@ -30,12 +31,13 @@ class DetectEnvironment
     /**
      * Detect if a custom environment file matching the APP_ENV exists.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     *
      * @return void
      */
     protected function checkForSpecificEnvironmentFile($app)
     {
-        if (! env('APP_ENV')) {
+        if (!env('APP_ENV')) {
             return;
         }
 
