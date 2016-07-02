@@ -22,7 +22,7 @@ class CacheMemcachedStoreTest extends PHPUnit_Framework_TestCase
 
     public function testMemcacheGetMultiValuesAreReturnedWithCorrectKeys()
     {
-        if (! class_exists('Memcached')) {
+        if (!class_exists('Memcached')) {
             $this->markTestSkipped('Memcached module not installed');
         }
 

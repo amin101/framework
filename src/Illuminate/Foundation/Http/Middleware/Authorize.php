@@ -17,7 +17,8 @@ class Authorize
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
+     *
      * @return void
      */
     public function __construct(Gate $gate)
@@ -28,13 +29,14 @@ class Authorize
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $ability
-     * @param  string|null  $model
-     * @return mixed
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     * @param string                   $ability
+     * @param string|null              $model
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return mixed
      */
     public function handle($request, Closure $next, $ability, $model = null)
     {
@@ -46,8 +48,9 @@ class Authorize
     /**
      * Get the arguments parameter for the gate.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $model
+     * @param \Illuminate\Http\Request $request
+     * @param string|null              $model
+     *
      * @return array|string|\Illuminate\Database\Eloquent\Model
      */
     protected function getGateArguments($request, $model)

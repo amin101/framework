@@ -9,11 +9,12 @@ trait AuthorizesRequests
     /**
      * Authorize a given action against a set of arguments.
      *
-     * @param  mixed  $ability
-     * @param  mixed|array  $arguments
-     * @return \Illuminate\Auth\Access\Response
+     * @param mixed       $ability
+     * @param mixed|array $arguments
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Auth\Access\Response
      */
     public function authorize($ability, $arguments = [])
     {
@@ -25,12 +26,13 @@ trait AuthorizesRequests
     /**
      * Authorize a given action for a user.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed  $user
-     * @param  mixed  $ability
-     * @param  mixed|array  $arguments
-     * @return \Illuminate\Auth\Access\Response
+     * @param \Illuminate\Contracts\Auth\Authenticatable|mixed $user
+     * @param mixed                                            $ability
+     * @param mixed|array                                      $arguments
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Auth\Access\Response
      */
     public function authorizeForUser($user, $ability, $arguments = [])
     {
@@ -42,8 +44,9 @@ trait AuthorizesRequests
     /**
      * Guesses the ability's name if it wasn't provided.
      *
-     * @param  mixed  $ability
-     * @param  mixed|array  $arguments
+     * @param mixed       $ability
+     * @param mixed|array $arguments
+     *
      * @return array
      */
     protected function parseAbilityAndArguments($ability, $arguments)

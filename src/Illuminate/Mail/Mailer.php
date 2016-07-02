@@ -3,18 +3,18 @@
 namespace Illuminate\Mail;
 
 use Closure;
-use Swift_Mailer;
-use Swift_Message;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use SuperClosure\Serializer;
-use InvalidArgumentException;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Contracts\Queue\Queue as QueueContract;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Mail\Mailer as MailerContract;
 use Illuminate\Contracts\Mail\MailQueue as MailQueueContract;
+use Illuminate\Contracts\Queue\Queue as QueueContract;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
+use SuperClosure\Serializer;
+use Swift_Mailer;
+use Swift_Message;
 
 class Mailer implements MailerContract, MailQueueContract
 {
@@ -77,9 +77,10 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Create a new Mailer instance.
      *
-     * @param  \Illuminate\Contracts\View\Factory  $views
-     * @param  \Swift_Mailer  $swift
-     * @param  \Illuminate\Contracts\Events\Dispatcher|null  $events
+     * @param \Illuminate\Contracts\View\Factory           $views
+     * @param \Swift_Mailer                                $swift
+     * @param \Illuminate\Contracts\Events\Dispatcher|null $events
+     *
      * @return void
      */
     public function __construct(Factory $views, Swift_Mailer $swift, Dispatcher $events = null)
@@ -92,8 +93,9 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Set the global from address and name.
      *
-     * @param  string  $address
-     * @param  string|null  $name
+     * @param string      $address
+     * @param string|null $name
+     *
      * @return void
      */
     public function alwaysFrom($address, $name = null)
@@ -104,8 +106,9 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Set the global to address and name.
      *
-     * @param  string  $address
-     * @param  string|null  $name
+     * @param string      $address
+     * @param string|null $name
+     *
      * @return void
      */
     public function alwaysTo($address, $name = null)
@@ -116,8 +119,9 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Send a new message when only a raw text part.
      *
-     * @param  string  $text
-     * @param  mixed  $callback
+     * @param string $text
+     * @param mixed  $callback
+     *
      * @return void
      */
     public function raw($text, $callback)
@@ -128,9 +132,10 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Send a new message when only a plain part.
      *
-     * @param  string  $view
-     * @param  array  $data
-     * @param  mixed  $callback
+     * @param string $view
+     * @param array  $data
+     * @param mixed  $callback
+     *
      * @return void
      */
     public function plain($view, array $data, $callback)
@@ -141,9 +146,10 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Send a new message using a view.
      *
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     *
      * @return void
      */
     public function send($view, array $data, $callback)
@@ -174,10 +180,11 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Queue a new e-mail message for sending.
      *
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
-     * @param  string|null  $queue
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     * @param string|null     $queue
+     *
      * @return mixed
      */
     public function queue($view, array $data, $callback, $queue = null)
@@ -190,10 +197,11 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Queue a new e-mail message for sending on the given queue.
      *
-     * @param  string  $queue
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param string          $queue
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     *
      * @return mixed
      */
     public function onQueue($queue, $view, array $data, $callback)
@@ -206,10 +214,11 @@ class Mailer implements MailerContract, MailQueueContract
      *
      * This method didn't match rest of framework's "onQueue" phrasing. Added "onQueue".
      *
-     * @param  string  $queue
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param string          $queue
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     *
      * @return mixed
      */
     public function queueOn($queue, $view, array $data, $callback)
@@ -220,11 +229,12 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Queue a new e-mail message for sending after (n) seconds.
      *
-     * @param  int  $delay
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
-     * @param  string|null  $queue
+     * @param int             $delay
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     * @param string|null     $queue
+     *
      * @return mixed
      */
     public function later($delay, $view, array $data, $callback, $queue = null)
@@ -237,11 +247,12 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Queue a new e-mail message for sending after (n) seconds on the given queue.
      *
-     * @param  string  $queue
-     * @param  int  $delay
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param string          $queue
+     * @param int             $delay
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     *
      * @return mixed
      */
     public function laterOn($queue, $delay, $view, array $data, $callback)
@@ -252,23 +263,25 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Build the callable for a queued e-mail job.
      *
-     * @param  \Closure|string  $callback
+     * @param \Closure|string $callback
+     *
      * @return string
      */
     protected function buildQueueCallable($callback)
     {
-        if (! $callback instanceof Closure) {
+        if (!$callback instanceof Closure) {
             return $callback;
         }
 
-        return (new Serializer)->serialize($callback);
+        return (new Serializer())->serialize($callback);
     }
 
     /**
      * Handle a queued e-mail message job.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  array  $data
+     * @param \Illuminate\Contracts\Queue\Job $job
+     * @param array                           $data
+     *
      * @return void
      */
     public function handleQueuedMessage($job, $data)
@@ -281,13 +294,14 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Get the true callable for a queued e-mail message.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Closure|string
      */
     protected function getQueuedCallable(array $data)
     {
         if (Str::contains($data['callback'], 'SerializableClosure')) {
-            return (new Serializer)->unserialize($data['callback']);
+            return (new Serializer())->unserialize($data['callback']);
         }
 
         return $data['callback'];
@@ -308,11 +322,12 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Add the content to a given message.
      *
-     * @param  \Illuminate\Mail\Message  $message
-     * @param  string  $view
-     * @param  string  $plain
-     * @param  string  $raw
-     * @param  array  $data
+     * @param \Illuminate\Mail\Message $message
+     * @param string                   $view
+     * @param string                   $plain
+     * @param string                   $raw
+     * @param array                    $data
+     *
      * @return void
      */
     protected function addContent($message, $view, $plain, $raw, $data)
@@ -337,10 +352,11 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Parse the given view name or array.
      *
-     * @param  string|array  $view
-     * @return array
+     * @param string|array $view
      *
      * @throws \InvalidArgumentException
+     *
+     * @return array
      */
     protected function parseView($view)
     {
@@ -372,7 +388,8 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Send a Swift Message instance.
      *
-     * @param  \Swift_Message  $message
+     * @param \Swift_Message $message
+     *
      * @return void
      */
     protected function sendSwiftMessage($message)
@@ -391,11 +408,12 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Call the provided message builder.
      *
-     * @param  \Closure|string  $callback
-     * @param  \Illuminate\Mail\Message  $message
-     * @return mixed
+     * @param \Closure|string          $callback
+     * @param \Illuminate\Mail\Message $message
      *
      * @throws \InvalidArgumentException
+     *
+     * @return mixed
      */
     protected function callMessageBuilder($callback, $message)
     {
@@ -417,12 +435,12 @@ class Mailer implements MailerContract, MailQueueContract
      */
     protected function createMessage()
     {
-        $message = new Message(new Swift_Message);
+        $message = new Message(new Swift_Message());
 
         // If a global from address has been specified we will set it on every message
         // instances so the developer does not have to repeat themselves every time
         // they create a new message. We will just go ahead and push the address.
-        if (! empty($this->from['address'])) {
+        if (!empty($this->from['address'])) {
             $message->from($this->from['address'], $this->from['name']);
         }
 
@@ -432,8 +450,9 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Render the given view.
      *
-     * @param  string  $view
-     * @param  array  $data
+     * @param string $view
+     * @param array  $data
+     *
      * @return string
      */
     protected function getView($view, $data)
@@ -474,7 +493,8 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Set the Swift Mailer instance.
      *
-     * @param  \Swift_Mailer  $swift
+     * @param \Swift_Mailer $swift
+     *
      * @return void
      */
     public function setSwiftMailer($swift)
@@ -485,7 +505,8 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Set the queue manager instance.
      *
-     * @param  \Illuminate\Contracts\Queue\Queue  $queue
+     * @param \Illuminate\Contracts\Queue\Queue $queue
+     *
      * @return $this
      */
     public function setQueue(QueueContract $queue)
@@ -498,7 +519,8 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Set the IoC container instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param \Illuminate\Contracts\Container\Container $container
+     *
      * @return void
      */
     public function setContainer(Container $container)
