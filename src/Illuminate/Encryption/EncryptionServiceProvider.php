@@ -2,9 +2,9 @@
 
 namespace Illuminate\Encryption;
 
-use RuntimeException;
-use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use RuntimeException;
 
 class EncryptionServiceProvider extends ServiceProvider
 {
@@ -29,11 +29,12 @@ class EncryptionServiceProvider extends ServiceProvider
     /**
      * Get the proper encrypter instance for the given key and cipher.
      *
-     * @param  string  $key
-     * @param  string  $cipher
-     * @return mixed
+     * @param string $key
+     * @param string $cipher
      *
      * @throws \RuntimeException
+     *
+     * @return mixed
      */
     protected function getEncrypterForKeyAndCipher($key, $cipher)
     {

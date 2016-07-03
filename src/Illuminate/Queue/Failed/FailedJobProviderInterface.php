@@ -7,9 +7,10 @@ interface FailedJobProviderInterface
     /**
      * Log a failed job into storage.
      *
-     * @param  string  $connection
-     * @param  string  $queue
-     * @param  string  $payload
+     * @param string $connection
+     * @param string $queue
+     * @param string $payload
+     *
      * @return int|null
      */
     public function log($connection, $queue, $payload);
@@ -24,7 +25,8 @@ interface FailedJobProviderInterface
     /**
      * Get a single failed job.
      *
-     * @param  mixed  $id
+     * @param mixed $id
+     *
      * @return array
      */
     public function find($id);
@@ -32,7 +34,8 @@ interface FailedJobProviderInterface
     /**
      * Delete a single failed job from storage.
      *
-     * @param  mixed  $id
+     * @param mixed $id
+     *
      * @return bool
      */
     public function forget($id);

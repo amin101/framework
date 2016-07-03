@@ -3,10 +3,10 @@
 namespace Illuminate\Encryption;
 
 use Exception;
-use RuntimeException;
 use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
+use Illuminate\Contracts\Encryption\EncryptException;
+use RuntimeException;
 
 /**
  * @deprecated since version 5.1. Use Illuminate\Encryption\Encrypter.
@@ -30,11 +30,12 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Create a new encrypter instance.
      *
-     * @param  string  $key
-     * @param  string  $cipher
-     * @return void
+     * @param string $key
+     * @param string $cipher
      *
      * @throws \RuntimeException
+     *
+     * @return void
      */
     public function __construct($key, $cipher = MCRYPT_RIJNDAEL_128)
     {
@@ -52,8 +53,9 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Determine if the given key and cipher combination is valid.
      *
-     * @param  string  $key
-     * @param  string  $cipher
+     * @param string $key
+     * @param string $cipher
+     *
      * @return bool
      */
     public static function supported($key, $cipher)
@@ -65,10 +67,11 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Encrypt the given value.
      *
-     * @param  string  $value
-     * @return string
+     * @param string $value
      *
      * @throws \Illuminate\Contracts\Encryption\EncryptException
+     *
+     * @return string
      */
     public function encrypt($value)
     {
@@ -83,7 +86,7 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
 
         $json = json_encode(compact('iv', 'value', 'mac'));
 
-        if (! is_string($json)) {
+        if (!is_string($json)) {
             throw new EncryptException('Could not encrypt the data.');
         }
 
@@ -93,8 +96,9 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Pad and use mcrypt on the given value and input vector.
      *
-     * @param  string  $value
-     * @param  string  $iv
+     * @param string $value
+     * @param string $iv
+     *
      * @return string
      */
     protected function padAndMcrypt($value, $iv)
@@ -107,7 +111,8 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Decrypt the given value.
      *
-     * @param  string  $payload
+     * @param string $payload
+     *
      * @return string
      */
     public function decrypt($payload)
@@ -127,11 +132,12 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Run the mcrypt decryption routine for the value.
      *
-     * @param  string  $value
-     * @param  string  $iv
-     * @return string
+     * @param string $value
+     * @param string $iv
      *
      * @throws \Illuminate\Contracts\Encryption\DecryptException
+     *
+     * @return string
      */
     protected function mcryptDecrypt($value, $iv)
     {
@@ -145,7 +151,8 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Add PKCS7 padding to a given value.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     protected function addPadding($value)
@@ -158,7 +165,8 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Remove the padding from the given value.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     protected function stripPadding($value)
@@ -171,8 +179,9 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
     /**
      * Determine if the given padding for a value is valid.
      *
-     * @param  string  $pad
-     * @param  string  $value
+     * @param string $pad
+     * @param string $value
+     *
      * @return bool
      */
     protected function paddingIsValid($pad, $value)

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Str;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Encryption\McryptEncrypter;
+use Illuminate\Support\Str;
 
 class EncrypterTest extends PHPUnit_Framework_TestCase
 {
@@ -96,7 +96,7 @@ class EncrypterTest extends PHPUnit_Framework_TestCase
 
     public function testOpenSslEncrypterCanDecryptMcryptedData()
     {
-        if (! extension_loaded('mcrypt')) {
+        if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('Mcrypt module not installed');
         }
 

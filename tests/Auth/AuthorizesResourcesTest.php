@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Routing\Route;
 
 class AuthorizesResourcesTest extends PHPUnit_Framework_TestCase
 {
@@ -59,8 +59,9 @@ class AuthorizesResourcesTest extends PHPUnit_Framework_TestCase
     /**
      * Assert that the given middleware has been registered on the given controller.
      *
-     * @param  \Illuminate\Routing\Controller  $controller
-     * @param  string  $middleware
+     * @param \Illuminate\Routing\Controller $controller
+     * @param string                         $middleware
+     *
      * @return void
      */
     protected function assertHasMiddleware($controller, $middleware)
@@ -74,7 +75,8 @@ class AuthorizesResourcesTest extends PHPUnit_Framework_TestCase
     /**
      * Get a request object, with the route pointing to the given method on the controller.
      *
-     * @param  string  $method
+     * @param string $method
+     *
      * @return \Illuminate\Http\Request
      */
     protected function request($method)

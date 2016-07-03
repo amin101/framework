@@ -35,10 +35,11 @@ class JobFailed
     /**
      * Create a new event instance.
      *
-     * @param  string  $connectionName
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  array  $data
-     * @param  int|null  $failedId
+     * @param string                          $connectionName
+     * @param \Illuminate\Contracts\Queue\Job $job
+     * @param array                           $data
+     * @param int|null                        $failedId
+     *
      * @return void
      */
     public function __construct($connectionName, $job, $data, $failedId = null)

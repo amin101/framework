@@ -2,8 +2,8 @@
 
 namespace Illuminate\Database;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Console\Seeds\SeedCommand;
+use Illuminate\Support\ServiceProvider;
 
 class SeedServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class SeedServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('seeder', function () {
-            return new Seeder;
+            return new Seeder();
         });
 
         $this->registerSeedCommand();

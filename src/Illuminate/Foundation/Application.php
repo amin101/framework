@@ -3,20 +3,20 @@
 namespace Illuminate\Foundation;
 
 use Closure;
-use RuntimeException;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Illuminate\Container\Container;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Events\EventServiceProvider;
-use Illuminate\Routing\RoutingServiceProvider;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\Request;
+use Illuminate\Routing\RoutingServiceProvider;
+use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use RuntimeException;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class Application extends Container implements ApplicationContract, HttpKernelInterface
 {
@@ -135,7 +135,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Create a new Illuminate application instance.
      *
-     * @param  string|null  $basePath
+     * @param string|null $basePath
+     *
      * @return void
      */
     public function __construct($basePath = null)
@@ -190,7 +191,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Run the given array of bootstrap classes.
      *
-     * @param  array  $bootstrappers
+     * @param array $bootstrappers
+     *
      * @return void
      */
     public function bootstrapWith(array $bootstrappers)
@@ -209,7 +211,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a callback to run after loading the environment.
      *
-     * @param  \Closure  $callback
+     * @param \Closure $callback
+     *
      * @return void
      */
     public function afterLoadingEnvironment(Closure $callback)
@@ -222,8 +225,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a callback to run before a bootstrapper.
      *
-     * @param  string  $bootstrapper
-     * @param  Closure  $callback
+     * @param string  $bootstrapper
+     * @param Closure $callback
+     *
      * @return void
      */
     public function beforeBootstrapping($bootstrapper, Closure $callback)
@@ -234,8 +238,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a callback to run after a bootstrapper.
      *
-     * @param  string  $bootstrapper
-     * @param  Closure  $callback
+     * @param string  $bootstrapper
+     * @param Closure $callback
+     *
      * @return void
      */
     public function afterBootstrapping($bootstrapper, Closure $callback)
@@ -256,7 +261,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the base path for the application.
      *
-     * @param  string  $basePath
+     * @param string $basePath
+     *
      * @return $this
      */
     public function setBasePath($basePath)
@@ -338,7 +344,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the database directory.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return $this
      */
     public function useDatabasePath($path)
@@ -383,7 +390,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the storage directory.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return $this
      */
     public function useStoragePath($path)
@@ -408,7 +416,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the directory for the environment file.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return $this
      */
     public function useEnvironmentPath($path)
@@ -421,7 +430,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the environment file to be loaded during bootstrapping.
      *
-     * @param  string  $file
+     * @param string $file
+     *
      * @return $this
      */
     public function loadEnvironmentFrom($file)
@@ -455,6 +465,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * Get or check the current application environment.
      *
      * @param  mixed
+     *
      * @return string|bool
      */
     public function environment()
@@ -487,7 +498,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Detect the application's current environment.
      *
-     * @param  \Closure  $callback
+     * @param \Closure $callback
+     *
      * @return string
      */
     public function detectEnvironment(Closure $callback)
@@ -526,21 +538,22 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     {
         $manifestPath = $this->getCachedServicesPath();
 
-        (new ProviderRepository($this, new Filesystem, $manifestPath))
+        (new ProviderRepository($this, new Filesystem(), $manifestPath))
                     ->load($this->config['app.providers']);
     }
 
     /**
      * Register a service provider with the application.
      *
-     * @param  \Illuminate\Support\ServiceProvider|string  $provider
-     * @param  array  $options
-     * @param  bool   $force
+     * @param \Illuminate\Support\ServiceProvider|string $provider
+     * @param array                                      $options
+     * @param bool                                       $force
+     *
      * @return \Illuminate\Support\ServiceProvider
      */
     public function register($provider, $options = [], $force = false)
     {
-        if (($registered = $this->getProvider($provider)) && ! $force) {
+        if (($registered = $this->getProvider($provider)) && !$force) {
             return $registered;
         }
 
@@ -575,7 +588,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Get the registered service provider instance if it exists.
      *
-     * @param  \Illuminate\Support\ServiceProvider|string  $provider
+     * @param \Illuminate\Support\ServiceProvider|string $provider
+     *
      * @return \Illuminate\Support\ServiceProvider|null
      */
     public function getProvider($provider)
@@ -590,7 +604,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Resolve a service provider instance from the class name.
      *
-     * @param  string  $provider
+     * @param string $provider
+     *
      * @return \Illuminate\Support\ServiceProvider
      */
     public function resolveProviderClass($provider)
@@ -601,7 +616,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Mark the given provider as registered.
      *
-     * @param  \Illuminate\Support\ServiceProvider  $provider
+     * @param \Illuminate\Support\ServiceProvider $provider
+     *
      * @return void
      */
     protected function markAsRegistered($provider)
@@ -633,12 +649,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Load the provider for a deferred service.
      *
-     * @param  string  $service
+     * @param string $service
+     *
      * @return void
      */
     public function loadDeferredProvider($service)
     {
-        if (! isset($this->deferredServices[$service])) {
+        if (!isset($this->deferredServices[$service])) {
             return;
         }
 
@@ -647,7 +664,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         // If the service provider has not already been loaded and registered we can
         // register it with the application and remove the service from this list
         // of deferred services, since it will already be loaded on subsequent.
-        if (! isset($this->loadedProviders[$provider])) {
+        if (!isset($this->loadedProviders[$provider])) {
             $this->registerDeferredProvider($provider, $service);
         }
     }
@@ -655,8 +672,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a deferred provider and service.
      *
-     * @param  string  $provider
-     * @param  string  $service
+     * @param string $provider
+     * @param string $service
+     *
      * @return void
      */
     public function registerDeferredProvider($provider, $service = null)
@@ -670,7 +688,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
         $this->register($instance = new $provider($this));
 
-        if (! $this->booted) {
+        if (!$this->booted) {
             $this->booting(function () use ($instance) {
                 $this->bootProvider($instance);
             });
@@ -682,8 +700,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      *
      * (Overriding Container::make)
      *
-     * @param  string  $abstract
-     * @param  array   $parameters
+     * @param string $abstract
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function make($abstract, array $parameters = [])
@@ -702,7 +721,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      *
      * (Overriding Container::bound)
      *
-     * @param  string  $abstract
+     * @param string $abstract
+     *
      * @return bool
      */
     public function bound($abstract)
@@ -748,7 +768,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Boot the given service provider.
      *
-     * @param  \Illuminate\Support\ServiceProvider  $provider
+     * @param \Illuminate\Support\ServiceProvider $provider
+     *
      * @return mixed
      */
     protected function bootProvider(ServiceProvider $provider)
@@ -761,7 +782,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a new boot listener.
      *
-     * @param  mixed  $callback
+     * @param mixed $callback
+     *
      * @return void
      */
     public function booting($callback)
@@ -772,7 +794,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a new "booted" listener.
      *
-     * @param  mixed  $callback
+     * @param mixed $callback
+     *
      * @return void
      */
     public function booted($callback)
@@ -787,7 +810,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Call the booting callbacks for the application.
      *
-     * @param  array  $callbacks
+     * @param array $callbacks
+     *
      * @return void
      */
     protected function fireAppCallbacks(array $callbacks)
@@ -889,12 +913,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Throw an HttpException with the given data.
      *
-     * @param  int     $code
-     * @param  string  $message
-     * @param  array   $headers
-     * @return void
+     * @param int    $code
+     * @param string $message
+     * @param array  $headers
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     *
+     * @return void
      */
     public function abort($code, $message = '', array $headers = [])
     {
@@ -908,7 +933,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Register a terminating callback with the application.
      *
-     * @param  \Closure  $callback
+     * @param \Closure $callback
+     *
      * @return $this
      */
     public function terminating(Closure $callback)
@@ -953,7 +979,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the application's deferred services.
      *
-     * @param  array  $services
+     * @param array $services
+     *
      * @return void
      */
     public function setDeferredServices(array $services)
@@ -964,7 +991,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Add an array of services to the application's deferred services.
      *
-     * @param  array  $services
+     * @param array $services
+     *
      * @return void
      */
     public function addDeferredServices(array $services)
@@ -975,7 +1003,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Determine if the given service is a deferred service.
      *
-     * @param  string  $service
+     * @param string $service
+     *
      * @return bool
      */
     public function isDeferredService($service)
@@ -986,7 +1015,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Define a callback to be used to configure Monolog.
      *
-     * @param  callable  $callback
+     * @param callable $callback
+     *
      * @return $this
      */
     public function configureMonologUsing(callable $callback)
@@ -1003,7 +1033,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function hasMonologConfigurator()
     {
-        return ! is_null($this->monologConfigurator);
+        return !is_null($this->monologConfigurator);
     }
 
     /**
@@ -1029,7 +1059,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Set the current application locale.
      *
-     * @param  string  $locale
+     * @param string $locale
+     *
      * @return void
      */
     public function setLocale($locale)
@@ -1044,7 +1075,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Determine if application locale is the given locale.
      *
-     * @param  string  $locale
+     * @param string $locale
+     *
      * @return bool
      */
     public function isLocale($locale)
@@ -1118,13 +1150,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Get the application namespace.
      *
-     * @return string
-     *
      * @throws \RuntimeException
+     *
+     * @return string
      */
     public function getNamespace()
     {
-        if (! is_null($this->namespace)) {
+        if (!is_null($this->namespace)) {
             return $this->namespace;
         }
 
